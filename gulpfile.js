@@ -20,12 +20,12 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('less', function () {
-    return gulp.src('css/*.less')
+    return gulp.src('css/src/*.less')
         .pipe(plumber())
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(minifyCSS())
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('css/dist'))
         .pipe(reload({stream:true}))
         .pipe(notify('Finished file: <%= file.relative %>'));
 });
@@ -60,7 +60,7 @@ gulp.task('bs-reload', function () {
 
 // Default task to be run with `gulp`
 gulp.task('default', ['jade', 'less', 'browser-sync'], function () {
-    gulp.watch('css/*.less', ['less']);
+    gulp.watch('css/src/*.less', ['less']);
     gulp.watch('jade/index.jade', ['jade']);
     gulp.watch('js/src/*.js', ['js']);
 });

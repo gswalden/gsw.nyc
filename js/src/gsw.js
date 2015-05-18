@@ -1,4 +1,5 @@
 !(function(window, document) {
+  // some jquery-esque functions
   function $1(selector, context) {
     return (context || document).querySelector(selector);
   }
@@ -7,6 +8,7 @@
       el.style[property] = styles[property];
   }
   
+  // fade in the subtitle
   window.onload = function() {
     var $clean = $1('.clean');
     setTimeout(function() {
@@ -18,6 +20,7 @@
     }, 1900);
   };
   
+  // size the triangles (border between hero and resume)
   var $triangle = $1('.tri-left');
   var $triangle2 = $1('.tri-right');
   function onResize() {
@@ -31,7 +34,8 @@
       opacity: 1
     });
   }
+  // run initially and on resize
   window.onresize = onResize;
   onResize();
-})(window, document);
 
+})(window, document);
