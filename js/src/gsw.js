@@ -9,15 +9,30 @@
   }
   
   // fade in the subtitle
-  window.onload = function() {
-    var $clean = $1('.clean');
+  var $clean = $1('.clean');
+  var $dash = $1('.dash');
+  function fadeIn() {
+    if (document.hidden) {
+      return false;
+    }
     setTimeout(function() {
       css($clean, {opacity: 1});
     }, 800);
-    var $dash = $1('.dash');
     setTimeout(function() {
       css($dash, {opacity: 1});
     }, 1900);
+    return true;
+  }
+  function onVisChange() {
+    if (fadeIn()) {
+      document.removeEventListener('visibilitychange', onVisChange);
+    }
+  }
+  window.onload = function() {
+    // make sure tab is visible when animation runs
+    if (!fadeIn()) {
+      document.addEventListener('visibilitychange', onVisChange);
+    }
   };
   
   // size the triangles (border between hero and resume)
