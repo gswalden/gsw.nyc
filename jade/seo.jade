@@ -1,8 +1,6 @@
 - var seo = {};
-- seo.first_name = 'Greg';
-- seo.last_name = 'Walden';
-- seo.author = seo.first_name + ' ' + seo.last_name;
-- seo.title = seo.author + ' &ndash; Full-Stack Web Developer in NYC';
+- seo.author = 'Greg Walden';
+- seo.title = seo.author + ' – Full-Stack Web Developer in NYC';
 - seo.description = 'The hub for @givemesnacks, including social media links and a PDF resume.';
 - seo.url = 'http://www.gsw.nyc';
 - seo.type = 'profile';
@@ -26,8 +24,6 @@ link(rel='canonical' href=seo.url)
 //- Open Graph Specifics
 - each name in ['url', 'type']
   meta(property='og:' + name, content=seo[name])
-- each name in ['first_name', 'last_name', 'gender']
-  meta(property='profile:' + name, content=seo[name])
 
 //- Twitter Card Specifics
 - each name in ['card', 'site', 'creator']
