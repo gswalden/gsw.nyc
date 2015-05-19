@@ -1,0 +1,34 @@
+- var seo = {};
+- seo.first_name = 'Greg';
+- seo.last_name = 'Walden';
+- seo.author = seo.first_name + ' ' + seo.last_name;
+- seo.title = seo.author + ' &ndash; Full-Stack Web Developer in NYC';
+- seo.description = 'The hub for @givemesnacks, including social media links and a PDF resume.';
+- seo.url = 'http://www.gsw.nyc';
+- seo.type = 'profile';
+- seo.gender = 'male';
+- seo.site = '@givemesnacks';
+- seo.creator = seo.site;
+- seo.image = seo.url + '/img/handsome-gentleman.jpg';
+- seo.card = 'summary_large_image';
+
+//- HTML basics
+title=seo.title
+meta(name='author', content=seo.author)
+meta(name='description', content=seo.description)
+link(rel='canonical' href=seo.url)
+
+//- Common Items
+- each name in ['title', 'description', 'image']
+  meta(property='og:' + name, content=seo[name])
+  meta(name='twitter:' + name, content=seo[name])
+
+//- Open Graph Specifics
+- each name in ['url', 'type']
+  meta(property='og:' + name, content=seo[name])
+- each name in ['first_name', 'last_name', 'gender']
+  meta(property='profile:' + name, content=seo[name])
+
+//- Twitter Card Specifics
+- each name in ['card', 'site', 'creator']
+  meta(name='twitter:' + name, content=seo[name])

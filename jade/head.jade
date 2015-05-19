@@ -1,17 +1,20 @@
-head
-  //
-    Oh hey! Way to dig deep here. This site was over-engineered (always a good time)
-    by using Jade as an HTML template language, LESS to generate CSS,
-    and I minified all JS (which, btw, is plain, fast JS, not jQuery!). These
-    operations are managed with gulp.js, and all available on GitHub!
+//
+  Oh hey! Way to dig deep here. This site was over-engineered (always a good time)
+  by using Jade as an HTML template language, LESS to generate CSS,
+  and I minified all JS (which, btw, is plain, fast JS, not jQuery!). These
+  operations are managed with gulp.js, and all available on GitHub!
+  https://github.com/gswalden/gsw.nyc
+head(prefix='og: http://ogp.me/ns/profile#')
+  
   meta(charset='utf-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
   meta(name='viewport', content='width=device-width, initial-scale=1')
-  meta(name='description', content='The hub for @givemesnacks.')
-  meta(name='author', content='Greg Walden')
-  title Greg Walden &ndash; Full-Stack Web Developer in NYC
+  
+  include seo.jade
+
   link(href='css/dist/gsw.css', rel='stylesheet')
-  link(href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+  link(href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', rel='stylesheet')
+  
   noscript
     style.
       .clean, .dash {
