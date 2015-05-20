@@ -36,11 +36,20 @@
   };
   
   // size the triangles (border between hero and resume)
+  function windowWidth() {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  }
   var $triangle = $1('.tri-left');
   var $triangle2 = $1('.tri-right');
   var $heroImg = $1('.hero-img');
+  var oldWidth;
   function onResize() {
-    var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var width = windowWidth();
+    // don't trigger on iOS Safari resize (which happens when URL bar slides)
+    if (width === oldWidth) {
+      return;
+    }
+    oldWidth = width;
     css($triangle, {
       borderWidth: '0 ' + Math.floor(width * 0.5).toString() + 'px 15px 0',
       opacity: 1
