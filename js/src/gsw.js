@@ -38,6 +38,7 @@
   // size the triangles (border between hero and resume)
   var $triangle = $1('.tri-left');
   var $triangle2 = $1('.tri-right');
+  var $heroImg = $1('.hero-img');
   function onResize() {
     var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     css($triangle, {
@@ -47,6 +48,10 @@
     css($triangle2, {
       borderWidth: '0 0 25px ' + Math.floor(width * .33).toString() + 'px',
       opacity: 1
+    });
+    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    css($heroImg, {
+      height: height + 'px'
     });
   }
   // run initially and on resize
