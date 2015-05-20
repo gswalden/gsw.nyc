@@ -152,6 +152,12 @@ h6 {
     width: 100px;
     border: 2px #333 solid;
     margin-left: 20px;
+    transform: scale(0);
+    transition: .4s ease-out;
+
+    &.hello {
+        transform: scale(1);
+    }
 }
 [class^=icon-] {
     width: 1.28571429em;
