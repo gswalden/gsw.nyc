@@ -7,6 +7,26 @@
     for (var property in styles)
       el.style[property] = styles[property];
   }
+  function addClass(el, className) {
+      if (el.classList) el.classList.add(className);
+      else if (!hasClass(el, className)) el.className += ' ' + className;
+  }
+  function windowWidth() {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  }
+  function windowHeight() {
+    return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  }
+
+  function inViewport(el) {
+      var rect = el.getBoundingClientRect();
+      return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= windowHeight() &&
+          rect.right <= windowWidth()
+      );
+  }
   
   // fade in the subtitle
   var $clean = $1('.clean');
@@ -36,9 +56,6 @@
   };
   
   // size the triangles (border between hero and resume)
-  function windowWidth() {
-    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  }
   var $triangle = $1('.tri-left');
   var $triangle2 = $1('.tri-right');
   var $heroImg = $1('.hero-img');
@@ -58,7 +75,7 @@
       borderWidth: '0 0 25px ' + Math.floor(width * .33).toString() + 'px',
       opacity: 1
     });
-    var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    var height = windowHeight();
     css($heroImg, {
       height: height + 'px'
     });
@@ -66,5 +83,16 @@
   // run initially and on resize
   window.onresize = onResize;
   onResize();
+
+  var $profilePic = $1('.profile');
+  var profileVisible = false;
+  window.onscroll = function() {
+    if (profileVisible) {
+      window.onscroll = function(){};
+    } else if (inViewport($profilePic)) {
+      profileVisible = true;
+      addClass($profilePic, 'hello');
+    }
+  };
 
 })(window, document);
