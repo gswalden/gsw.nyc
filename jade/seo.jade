@@ -11,9 +11,9 @@
 
 //- HTML basics
 title=seo.title
-meta(name='author', content=seo.author)
-meta(name='description', content=seo.description)
-link(rel='canonical' href=seo.url)
+meta(name='author', itemprop='name', content=seo.author)
+meta(name='description', itemprop='description', content=seo.description)
+link(rel='canonical', itemprop='url', href=seo.url)
 
 //- Common Items
 - each name in ['title', 'description', 'image']
@@ -27,3 +27,7 @@ link(rel='canonical' href=seo.url)
 //- Twitter Card Specifics
 - each name in ['card', 'site', 'creator']
   meta(name='twitter:' + name, content=seo[name])
+
+//- Microdata
+meta(itemprop='image', content=seo.image)
+meta(itemprop='alternateName', content=seo.creator)
