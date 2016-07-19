@@ -44,7 +44,6 @@
         headline.innerHTML = finalText;
         headline.style.fontWeight = 700;
         headline.style.opacity = 1;
-        if (store) store.setItem(key, 'false');;
       }, 250);
     }
   }
