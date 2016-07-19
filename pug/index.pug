@@ -1,0 +1,63 @@
+- var email = 'talk@gsw.nyc';
+mixin icon(src)
+  img(src=`../build/icons/${src}.svg`, inline)
+
+doctype html
+html(lang='en')
+  include head
+  body
+    section.first: .box
+      h1
+        | Fast
+        br
+        | Websites
+        br
+        span#headline Matter
+
+    section.second: .box
+      ul.contact
+        li(title='Public PGP key')
+          +icon('male')
+          a(href='//keybase.io/gsw') Greg Walden
+        li(title='Home')
+          +icon('map-marker')
+          a(href='//en.wikipedia.org/wiki/New_York_City') NYC
+        li(title='Employer')
+          +icon('briefcase')
+          a(href='//makerbot.com') MakerBot
+        li(title='Email')
+          +icon('envelope-o')
+          a(href='mailto:' + email)= email
+        li(title='GitHub')
+          +icon('github')
+          a(href='//github.com/gswalden') gswalden
+        li(title='LinkedIn')
+          +icon('linkedin-square')
+          a(href='//linkedin.com/in/gswalden') gswalden
+        li(title='Twitter')
+          +icon('twitter')
+          a(href='//twitter.com/givemesnacks') givemesnacks
+        li(title='Instagram')
+          +icon('instagram')
+          a(href='//instagram.com/givemesnacks') givemesnacks
+
+      hr
+
+      .credits.photographer
+        | Photographed by
+        br
+        a(href='https://www.beautifulgrease.com')
+          img.profile(src='alli.jpg', alt='Allison Ryan', title='Allison Ryan')
+
+      .credits.developer
+        | Developed by
+        br
+        img.profile(src='gsw.jpg', alt='Greg Walden', title='Greg Walden')
+
+    include scripts
+
+    //
+      Wait, where are the analytics? Well, after a sandwich and some mental gymnastics, I
+      decided my time is better spent writing code and making the site run
+      faster, than pouring over graphs to apply micro-optimizations. In other
+      words, enjoy this short reprieve from Google Analytics!

@@ -1,0 +1,110 @@
+@md: ~"(min-width: 768px)";
+@lg: ~"(min-width: 1000px)";
+@blue: #2c3e50;
+@white: #ecf0f1;
+@red: #e74c3c;
+@purple: #8e44ad;
+
+@import (less) '../node_modules/normalize.css/normalize.css';
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+h1 {
+  font-weight: 700;
+  margin: 0;
+  font-size: 3.5em;
+}
+ul {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+li {
+  display: inline-block;
+  min-width: 50%;
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+svg {
+  width: 1em;
+  height: 100%;
+  vertical-align: text-bottom;
+  margin-right: 0.5em;
+  fill: @red;
+}
+section {
+  width: 100%;
+  background: @blue;
+  color: @white;
+  padding: 3em 0;
+  @media @md {
+    font-size: 125%;
+  }
+  @media @lg {
+    font-size: 150%;
+  }
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+hr {
+  width: 70%;
+  border: 0.1em solid @blue;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  margin-left: 0;
+  transition: 0.2s;
+}
+#headline {
+  opacity: 0;
+  font-weight: 400;
+}
+.second {
+  background: @white;
+  color: @blue;
+}
+.box {
+  width: 85%;
+  margin: auto;
+}
+.contact {
+  list-style: none;
+  padding-left: 0;
+  a {
+    display: inline-block;
+    padding-bottom: 0.05em;
+    border-bottom: 0.15em solid transparent;
+    &:hover {
+      border-color: @blue;
+    }
+  }
+
+}
+.credits {
+  display: inline-block;
+  min-width: 50%;
+  font-size: 1.5em;
+}
+.profile {
+  border-radius: 50%;
+  width: 6em;
+  border: 0.1em @blue solid;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}

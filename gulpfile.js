@@ -1,60 +1,106 @@
 'use strict';
 
-const gulp      = require('gulp')
-  , browserSync = require('browser-sync').create()
-  , less        = require('gulp-less')
-  , minifyCSS   = require('gulp-cssnano')
+const gulp       = require('gulp')
+  , browserSync  = require('browser-sync').create()
+  , less         = require('gulp-less')
   , autoprefixer = require('gulp-autoprefixer')
-  , plumber     = require('gulp-plumber')
-  , notify      = require('gulp-notify')
-  , jade        = require('gulp-jade')
-  , uglify      = require('gulp-uglify')
-  , sourcemaps  = require('gulp-sourcemaps')
+  , plumber      = require('gulp-plumber')
+  , notify       = require('gulp-notify')
+  , pug          = require('gulp-pug')
+  , inlinesource = require('gulp-inline-source')
+  , ghPages      = require('gulp-gh-pages')
+  , join         = require('path').join
+  , dest         = 'build'
   ;
 
-// browser-sync task for starting the server.
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', () => {
   browserSync.init({
     server: {
-      baseDir: './'
+      baseDir: dest
     }
   });
 });
 
-gulp.task('less', function () {
-  return gulp.src('css/src/*.less')
+gulp.task('less', () => {
+  return gulp.src('less/*.less')
     .pipe(plumber())
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('css/dist'))
-    .pipe(browserSync.stream())
+    .pipe(gulp.dest(dest))
     .pipe(notify('Finished file: <%= file.relative %>'));
 });
 
-gulp.task('js', function () {
-  return gulp.src('js/src/*.js')
+gulp.task('js', () => {
+  return gulp.src('js/*.js')
+    .pipe(gulp.dest(dest))
+    .pipe(notify('Finished file: <%= file.relative %>'));
+});
+
+gulp.task('img', () => {
+  return gulp.src('img/{gsw,alli}.jpg')
+    .pipe(gulp.dest(dest))
+    .pipe(notify({
+      message: 'Finished images',
+      onLast: true
+    }));
+});
+
+gulp.task('icons', () => {
+  const names = [
+    'briefcase',
+    'github',
+    'instagram',
+    'linkedin-square',
+    'map-marker',
+    'envelope',
+    'envelope-o',
+    'male',
+    'twitter',
+  ].join(',');
+  return gulp.src(`icons/black/svg/{${names}}.svg`)
+    .pipe(gulp.dest(join(dest, 'icons')))
+    .pipe(notify({
+      message: 'Finished icons',
+      onLast: true
+    }));
+});
+
+gulp.task('pug', ['less', 'js', 'icons'], () => {
+  return gulp.src('pug/index.pug')
     .pipe(plumber())
-    .pipe(sourcemaps.init())
-    .pipe(uglify())
-    .pipe(sourcemaps.write('maps'))
-    .pipe(gulp.dest('js/dist'))
+    .pipe(pug())
+    .pipe(inlinesource({ compress: process.env.PUBLISH === 'true' }))
+    .pipe(gulp.dest(dest))
     .pipe(browserSync.stream())
     .pipe(notify('Finished file: <%= file.relative %>'));
 });
 
-gulp.task('jade', function () {
-  return gulp.src('jade/index.jade')
-    .pipe(plumber())
-    .pipe(jade())
-    .pipe(gulp.dest(''))
-    .pipe(browserSync.stream())
-    .pipe(notify('Finished file: <%= file.relative %>'));
+gulp.task('static', () => {
+  return gulp.src('static/*')
+    .pipe(gulp.dest(dest))
+    .pipe(notify({
+      message: 'Finished static files',
+      onLast: true
+    }));
 });
 
-// Default task to be run with `gulp`
-gulp.task('default', ['jade', 'less', 'browser-sync'], function () {
-  gulp.watch('css/src/*.less', ['less']);
-  gulp.watch('jade/index.jade', ['jade']);
-  gulp.watch('js/src/*.js', ['js']);
+gulp.task('clean', () => {
+  require('del').sync(['build', '.publish']);
+});
+
+gulp.task('build', ['less', 'icons', 'img', 'static', 'js', 'pug']);
+
+gulp.task('publish', ['clean', 'build'], () => {
+  return gulp.src('./build/**/*')
+    .pipe(ghPages());
+})
+
+gulp.task('default', ['build', 'browser-sync'], () => {
+  const src = [
+    'less/*.less',
+    'js/*.js',
+    'img/*.jpg',
+    'pug/*.pug'
+  ];
+  gulp.watch(src, ['pug']);
 });

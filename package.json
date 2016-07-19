@@ -6,16 +6,23 @@
   "main": "index.html",
   "author": "Greg Walden <hi@gsw.nyc>",
   "license": "ISC",
+  "scripts": {
+    "icons": "font-awesome-svg-png help --color black --no-png --dest icons",
+    "postinstall": "npm run icons",
+    "publish": "PUBLISH=true gulp publish"
+  },
   "devDependencies": {
     "browser-sync": "^2.7.1",
+    "del": "^2.2.1",
+    "font-awesome-svg-png": "^1.1.5",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^3.0.1",
-    "gulp-cssnano": "^2.1.0",
-    "gulp-jade": "^1.0.0",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-inline-source": "^2.1.0",
     "gulp-less": "^3.0.3",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.0",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglify": "^1.2.0"
+    "gulp-pug": "^3.0.3",
+    "normalize.css": "^4.2.0"
   }
 }
