@@ -20,9 +20,11 @@
     'respond',
     'beat slow',
     'win',
-    'make love',
+    'gain fans',
     'stick',
+    'help teams',
     'are a dream',
+    'get found',
     'are my fav',
   ];
 
