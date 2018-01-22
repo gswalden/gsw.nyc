@@ -17,7 +17,7 @@
     "font-awesome-svg-png": "^1.1.5",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-gh-pages": "^0.5.4",
+    "gulp-gh-pages": "tekd/gulp-gh-pages",
     "gulp-inline-source": "^3.0.0",
     "gulp-less": "^3.0.3",
     "gulp-notify": "^3.0.0",
