@@ -91,8 +91,12 @@ gulp.task('clean', () => {
 gulp.task('build', ['less', 'icons', 'img', 'static', 'js', 'pug']);
 
 gulp.task('publish', ['clean', 'build'], () => {
+  const opt = {};
+  if (process.env.REMOTE_URL) {
+    opt.remoteUrl = process.env.REMOTE_URL;
+  }
   return gulp.src('./build/**/*')
-    .pipe(ghPages());
+    .pipe(ghPages(opt));
 })
 
 gulp.task('default', ['build', 'browser-sync'], () => {
