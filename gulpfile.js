@@ -91,7 +91,7 @@ gulp.task('clean', () => {
 gulp.task('build', ['less', 'icons', 'img', 'static', 'js', 'pug']);
 
 gulp.task('publish', ['clean', 'build'], () => {
-  const opt = {};
+  const opt = { message: `Update ${new Date().toISOString()} [skip ci]` };
   if (process.env.REMOTE_URL) {
     opt.remoteUrl = process.env.REMOTE_URL;
   }
