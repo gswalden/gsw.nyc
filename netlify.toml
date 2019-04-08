@@ -1,0 +1,8 @@
+[build]
+  publish = "build/"
+
+  # Default build command.
+  command = "yarn run build"
+
+[context.production]
+  environment = { PUBLISH = "true" }
